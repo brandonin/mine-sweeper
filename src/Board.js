@@ -27,7 +27,7 @@ class Board extends Component {
             if (board[randomRow][randomCol]['value'] !== "bomb") {
                 minesArray.push(0);
                 board[randomRow][randomCol]['value'] = 'bomb';
-                this.generateNeighbors(randomRow, randomCol, board);
+                this.generateNeighbors(board, randomRow, randomCol);
             }
             // if (!minesArray.includes({randomRow , randomCol})) minesArray.push({randomRow, randomCol});
 
@@ -36,15 +36,29 @@ class Board extends Component {
         // minesArray.includes(rowKey * 8 + colKey) ? 'bomb' :
     }
 
-    generateNeighbors(row, col, board) {
+    generateNeighbors(board, row, col) {
         // make edge cases;
+        const top = row !== 0,
+                bottom = row !== board.length - 1,
+                left = col !== 0,
+                right = col !== board[row].length - 1;
+
+        if (top) board[row - 1][col]['value'] += 1;
+        if (left) board[row][col - 1]['value'] += 1;
+        if (bottom) board[row + 1][col]['value'] += 1;
+        if (right) board[row][col + 1]['value'] += 1;
+        if (top && left) board[row - 1][col - 1]['value'] += 1;
+        if (top && right) board[row - 1][col + 1]['value'] += 1;
+        if (bottom && left) board[row + 1][col - 1]['value'] += 1;
+        if (bottom && right) board[row + 1][col + 1]['value'] += 1;
     }
 
     handleClick(row, col) {
         const { board } = this.state;
         const duplicate = board.slice();
-        if (duplicate[row][col]['value'] === 'bomb') console.log('boom');
-        duplicate[row][col]['visible'] = true;
+        if (duplicate[row][col]['value'] !== null) duplicate[row][col]['visible'] = true;
+        // else do a flood filll algorithm;
+
         this.setState({board: duplicate});
     }
 
@@ -54,7 +68,7 @@ class Board extends Component {
         return (
             <Square
                 key = {value}
-                value = {value}
+                value = {board[row][col]['value']}
                 visible = {board[row][col]['visible']}
                 onClick = {() => this.handleClick(row, col)}
                 className = "col"
