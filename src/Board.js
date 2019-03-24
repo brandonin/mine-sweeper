@@ -12,16 +12,32 @@ class Board extends Component {
     generateBoard() {
         const { height, width, mines} = this.props;
         let minesArray = [];
-        while (minesArray.length < mines) {
-            const random = Math.floor(Math.random() * height * width);
-            if (!minesArray.includes(random)) minesArray.push(random);
-        }
-        return new Array(height).fill().map((_, rowKey) => Array(width).fill().map((_, colKey) => {
+
+        let board =  new Array(height).fill().map((_, rowKey) => Array(width).fill().map((_, colKey) => {
             return {
                 visible: false,
-                value: minesArray.includes(rowKey * 8 + colKey) ? 'bomb' : null
+                value: null
             };
         }))
+
+        while (minesArray.length < mines) {
+            const randomRow = Math.floor(Math.random() * height);
+            const randomCol = Math.floor(Math.random() * width);
+
+            if (board[randomRow][randomCol]['value'] !== "bomb") {
+                minesArray.push(0);
+                board[randomRow][randomCol]['value'] = 'bomb';
+                this.generateNeighbors(randomRow, randomCol, board);
+            }
+            // if (!minesArray.includes({randomRow , randomCol})) minesArray.push({randomRow, randomCol});
+
+        }
+        return board;
+        // minesArray.includes(rowKey * 8 + colKey) ? 'bomb' :
+    }
+
+    generateNeighbors(row, col, board) {
+        // make edge cases;
     }
 
     handleClick(row, col) {
