@@ -9,7 +9,7 @@ function dfs(board, row, col) {
     if (board[row][col]['visible']) return;
     board[row][col]['visible'] = true;
     if (board[row][col]['value'] !== null) return;
-    const {top, left, bottom, right} = checkNeighbors.checkNeighbors(board, row, col);
+    const {top, left, bottom, right} = checkNeighbors(board, row, col);
     if (top) dfs(board, row - 1, col);
     if (left) dfs(board, row, col - 1);
     if (bottom) dfs(board, row + 1, col);
