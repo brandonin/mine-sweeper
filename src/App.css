@@ -31,3 +31,18 @@
     transform: rotate(360deg);
   }
 }
+
+.square {
+  width: 34px;
+  height: 34px;
+  border: 1px solid black;
+  background-color: #fff;
+}
+
+.col {
+  padding: 1rem;
+  background-color: #33b5e5;
+  border: 2px solid #fff;
+  color: #fff;
+  text-align: center;
+}
