@@ -5,36 +5,26 @@ let count = 0;
 
 class Game extends Component {
     state = {
-        board: this.generateBoard(8, 8)
+        height: 8,
+        width: 8,
+        mines: 10
     }
 
     generateBoard(row, col) {
-        return new Array(row*col).fill().map(() => {
-            return {
-                visible: false,
-                value: count++
-            }
-        })
-        // return new Array(row).fill().map(() => Array(col).fill().map(() => {
-        //     return {
-        //         visible: false,
-        //         value: count++
-        //     };
-        // }))
+
     }
 
     handleClick(i) {
-        const duplicate = this.state.board.slice();
-        this.setState({hello: 'hi'});
+        // const duplicate = this.state.board.slice();
+        // this.setState({hello: 'hi'});
         console.log('hello', i);
     }
 
     render() {
-        const { board } = this.state;
-        console.log(board);
+        const { height, width, mines } = this.state;
 
         return (
-            <Board squares={board} onClick={(i) => this.handleClick(i)}/>
+            <Board height={height} width={width} mines={mines} />
         )
     }
 }
