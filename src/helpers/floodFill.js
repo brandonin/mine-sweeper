@@ -1,7 +1,7 @@
 import { schema as neighborsSchema } from './neighbors';
 
-export default function FloodFill(board, row, col, visible) {
-    dfs(board, row, col, visible);
+export default function FloodFill(board, row, col) {
+    dfs(board, row, col);
 }
 
 function dfs(board, row, col) {
