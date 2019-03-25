@@ -37,12 +37,30 @@
   height: 34px;
   border: 1px solid black;
   background-color: #fff;
+  border-radius: 2px;
 }
 
-.col {
-  padding: 1rem;
+.button, .col {
   background-color: #33b5e5;
   border: 2px solid #fff;
   color: #fff;
   text-align: center;
+}
+
+.button {
+  font-size: 14px;
+  color: black;
+  cursor: pointer;
+}
+
+.col {
+  padding: 1rem;
+}
+
+.visible {
+  background-color: red;
+}
+
+.positionAbsolute {
+  position: absolute;
 }
